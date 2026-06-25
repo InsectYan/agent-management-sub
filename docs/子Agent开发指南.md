@@ -265,3 +265,15 @@ node scripts/selftest-testgen.js
 - [主应用完整开发方案 §5](../agent-management-master/docs-design/主应用完整开发方案.md) — Skill 契约
 - [Loop 方案](../agent-management-master/docs/schemes/loop/README.md) — Loop 执行说明
 - [方案索引](../agent-management-master/docs/schemes/README.md) — 全部 Agent 方案
+
+---
+
+## 13. 项目设计文档
+
+业务 Skill 的完整方案（含前端 / 服务端 / Agent 拆分）放在 [`design-docs/`](../design-docs/README.md)：
+
+- **一项目一文件夹**：`design-docs/{project_key}/`
+- 索引：`README.md`；源稿归档：`source.md`
+- 示例：[testgen/](../design-docs/testgen/README.md)（`testgen-skill` 对应项目）
+
+用户提供未拆分的源设计文档时，按 [design-docs 梳理流程](../design-docs/README.md#源设计文档优化流程) 执行。

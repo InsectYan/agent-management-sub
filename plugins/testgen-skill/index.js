@@ -12,6 +12,7 @@ const {
   normalizeTestCases,
 } = require('./lib/docParser');
 const store = require('./lib/store');
+const bffClient = require('./lib/bffClient');
 
 const SKILL_DIR = __dirname;
 
@@ -36,6 +37,10 @@ module.exports = {
   },
   config: {
     llmDefaultProfile: 'ollama-qwen',
+    testgenBff: {
+      baseUrl: process.env.TESTGEN_BFF_URL || 'http://127.0.0.1:7003',
+      internalToken: process.env.TESTGEN_INTERNAL_TOKEN || '',
+    },
     actionDefaults: { POST: 'generate' },
     loop: {
       maxSteps: 4,
@@ -111,7 +116,10 @@ module.exports = {
       }
 
       if (!docContent && docId) {
-        const doc = await store.getDocument(ctx, docId);
+        let doc = await store.getDocument(ctx, docId);
+        if (!doc) {
+          doc = await bffClient.fetchDocument(ctx, docId);
+        }
         if (!doc) {
           const err = new Error(`文档不存在: doc_id=${docId}`);
           err.status = 404;
@@ -174,11 +182,25 @@ module.exports = {
       }
 
       const meta = params.doc_meta || {};
+      let knowledgeHint = '';
+      if (params.module) {
+        const entries = await bffClient.fetchKnowledge(ctx, { module: params.module });
+        if (entries.length) {
+          knowledgeHint = entries
+            .slice(0, 8)
+            .map(e => `- [${e.tag || e.module}] ${e.title || ''}: ${String(e.content || '').slice(0, 100)}`)
+            .join('\n');
+        }
+      }
+
       return {
         action: 'generate',
         topic: params.topic || params.doc_title,
         doc_content: params.doc_content,
         doc_id: params.doc_id,
+        module: params.module,
+        test_types: params.test_types,
+        options: params.options,
         doc_meta: {
           title: meta.title,
           sectionCount: meta.sectionCount,
@@ -186,9 +208,12 @@ module.exports = {
           requirements: meta.requirements,
         },
         endpoints: (meta.endpoints || []).join('\n'),
-        requirements_hint: (meta.requirements || [])
-          .map(r => `- ${r.section}: ${r.excerpt?.slice(0, 120)}`)
-          .join('\n'),
+        requirements_hint: [
+          (meta.requirements || [])
+            .map(r => `- ${r.section}: ${r.excerpt?.slice(0, 120)}`)
+            .join('\n'),
+          knowledgeHint ? `\n## 知识库\n${knowledgeHint}` : '',
+        ].filter(Boolean).join('\n'),
       };
     },
 

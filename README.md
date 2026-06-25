@@ -9,6 +9,7 @@
 ## 文档
 
 - [子 Agent 开发指南](./docs/子Agent开发指南.md) — 契约、回调流水线、方案选用、反模式
+- [设计文档](./design-docs/testgen/README.md) — 测试用例生成（Agent / 服务端 / 前端 拆分，见 [组织规则](./design-docs/README.md)）
 
 ## 示例 Skill
 
@@ -61,6 +62,8 @@ curl -X POST http://127.0.0.1:3001/api/skills/testgen \
 ```
 agent-management-sub/
 ├── docs/                    # 开发指南
+├── design-docs/             # 项目设计（一项目一文件夹，见 design-docs/README.md）
+│   └── testgen/
 ├── plugins/
 │   └── testgen-skill/       # Loop 方案完整示例
 │       ├── index.js

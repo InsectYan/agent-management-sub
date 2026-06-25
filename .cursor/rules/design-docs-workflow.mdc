@@ -1,0 +1,45 @@
+---
+description: design-docs 组织规则与源设计文档拆分流程（一项目一文件夹）
+globs: design-docs/**/*
+alwaysApply: false
+---
+
+# design-docs 工作流
+
+完整条文见 [`design-docs/README.md`](../../design-docs/README.md)。
+
+## 核心规则
+
+- **一个项目一个文件夹**：`design-docs/{project_key}/`
+- **禁止**在 `design-docs/` 根目录直接新增业务 `.md`（仅允许根 `README.md`）
+- 每个项目目录**必须**有 `README.md` 作为索引
+
+## 标准文件
+
+| 文件 | 用途 |
+|------|------|
+| `README.md` | 索引：架构图、文档拆分表、规范链接 |
+| `source.md` | 用户提供的原始设计（归档，不改写） |
+| `*-Agent与BFF层设计.md` | Skill / 主应用 BFF |
+| `*-服务端层设计.md` | 业务子应用 backend |
+| `*-前端层设计.md` | 业务子应用 frontend |
+
+## 用户扔源设计文档并要求优化时
+
+1. 确定或确认 `{project_key}`（小写英文，对齐 `app_key` / Skill）
+2. 创建 `design-docs/{project_key}/`，复制 `_template/` 若为新项目
+3. 源稿写入 `source.md`
+4. 按职责边界拆成独立文档，更新 `README.md` 索引
+5. 各层文档头部写清 **读者 / 归属 / 边界**，并引用 `source.md` 章节
+6. 若有子应用或 Skill，登记到 `admin-management-station` / `plugins/`
+
+## 新建项目
+
+```bash
+cp -r design-docs/_template design-docs/{project_key}
+# 编辑 README.md 与各层设计文档
+```
+
+## 已登记
+
+- `testgen` — [testgen/README.md](../../design-docs/testgen/README.md)
