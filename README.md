@@ -10,12 +10,14 @@
 
 - [子 Agent 开发指南](./docs/子Agent开发指南.md) — 契约、回调流水线、方案选用、反模式
 - [设计文档](./design-docs/testgen/README.md) — 测试用例生成（Agent / 服务端 / 前端 拆分，见 [组织规则](./design-docs/README.md)）
+- [接口测试执行](./design-docs/apitest/README.md) — 用例编辑、执行、监控与性能瓶颈分析
 
 ## 示例 Skill
 
 | Skill | scheme | 说明 |
 |-------|--------|------|
 | [testgen-skill](./plugins/testgen-skill/) | `loop` | 根据文档信息多步迭代生成测试用例 |
+| [perf-bottleneck-skill](./plugins/perf-bottleneck-skill/) | `react` | 性能 run 完成后分析 TPS/P95/错误率，输出瓶颈报告 |
 
 ## 接入主应用
 

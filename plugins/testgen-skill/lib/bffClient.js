@@ -69,8 +69,28 @@ async function fetchKnowledge(ctx, query = {}) {
   return res.data?.data?.list || res.data?.data || [];
 }
 
+/**
+ * 推送 Agent 执行上下文到 testgen BFF（供前端进度页展示）
+ * @param {import('egg').Context} ctx
+ * @param {number} jobId
+ * @param {Object} agentContext
+ */
+async function pushAgentContext(ctx, jobId, agentContext) {
+  if (!jobId) return;
+  const baseUrl = resolveBaseUrl(ctx);
+  await ctx.curl(`${baseUrl}/api/internal/generation-jobs/${jobId}/agent-context`, {
+    method: 'POST',
+    contentType: 'json',
+    data: agentContext,
+    dataType: 'json',
+    headers: buildHeaders(ctx),
+    timeout: 8000,
+  });
+}
+
 module.exports = {
   fetchDocument,
   fetchKnowledge,
+  pushAgentContext,
   resolveBaseUrl,
 };

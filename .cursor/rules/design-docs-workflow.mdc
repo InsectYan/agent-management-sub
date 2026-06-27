@@ -43,3 +43,4 @@ cp -r design-docs/_template design-docs/{project_key}
 ## 已登记
 
 - `testgen` — [testgen/README.md](../../design-docs/testgen/README.md)
+- `apitest` — [apitest/README.md](../../design-docs/apitest/README.md)

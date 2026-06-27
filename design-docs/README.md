@@ -74,6 +74,7 @@ design-docs/
 | project_key | 显示名 | 索引 |
 |-------------|--------|------|
 | `testgen` | 测试用例生成 / AI智能测试平台 | [testgen/README.md](./testgen/README.md) |
+| `apitest` | 接口测试执行（编辑 · 执行 · 监控 · 性能 Agent） | [apitest/README.md](./apitest/README.md) |
 
 ## 禁止
 
