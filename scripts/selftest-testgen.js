@@ -7,7 +7,7 @@
  *   node scripts/selftest-testgen.js
  *
  * 环境变量：
- *   BASE_URL  默认 http://127.0.0.1:3001
+ *   BASE_URL  默认 http://127.0.0.1:4001
  *   PLUGIN_DIR  若 Skill 未链入主应用，请先设置 PLUGIN_DIR 指向本仓库 plugins 并重启主应用
  */
 
@@ -16,7 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE = process.env.BASE_URL || 'http://127.0.0.1:3001';
+const BASE = process.env.BASE_URL || 'http://127.0.0.1:4001';
 const FIXTURE = path.join(__dirname, '../plugins/testgen-skill/fixtures/sample-user-api.md');
 
 async function postJson(urlPath, data) {

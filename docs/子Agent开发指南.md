@@ -212,8 +212,8 @@ PLUGIN_DIR=E:/AI_Projects/agent-management-sub/plugins
 ### 7.3 验证
 
 ```bash
-curl http://127.0.0.1:3001/api/plugins
-curl http://127.0.0.1:3001/api/plugins/testgen-skill/skill-doc
+curl http://127.0.0.1:4001/api/plugins
+curl http://127.0.0.1:4001/api/plugins/testgen-skill/skill-doc
 ```
 
 ---

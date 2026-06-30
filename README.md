@@ -42,8 +42,8 @@ PLUGIN_DIR=E:/AI_Projects/agent-management-sub/plugins
 ## 验证
 
 ```bash
-# 主应用 http://127.0.0.1:3001 已启动
-curl http://127.0.0.1:3001/api/plugins | jq '.plugins[] | select(.name=="testgen-skill")'
+# 主应用 http://127.0.0.1:4001 已启动
+curl http://127.0.0.1:4001/api/plugins | jq '.plugins[] | select(.name=="testgen-skill")'
 
 # Skill 级 selftest
 node scripts/selftest-testgen.js
@@ -52,7 +52,7 @@ node scripts/selftest-testgen.js
 ## 快速调用
 
 ```bash
-curl -X POST http://127.0.0.1:3001/api/skills/testgen \
+curl -X POST http://127.0.0.1:4001/api/skills/testgen \
   -H "Content-Type: application/json" \
   -d '{"doc_path":"fixtures/sample-user-api.md"}'
 ```
